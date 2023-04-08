@@ -13,7 +13,7 @@ import MessageView from './MessageView';
 
 export default class Messages {
 	static get url() {
-		return 'http://localhost:3000';
+		return 'https://polling-qlsb.onrender.com';
 	}
 
 	static get markup() {
