@@ -12,6 +12,10 @@ import {
 import MessageView from './MessageView';
 
 export default class Messages {
+	static get url() {
+		return 'http://localhost:3000';
+	}
+
 	static get markup() {
 		return `
 			<div class="title">Входящие</div>
@@ -32,7 +36,7 @@ export default class Messages {
 	}
 
 	registerEvents() {
-		const url = 'http://localhost:3000/messages/add';
+		const url = `${Messages.url}/messages/add`;
 		const btn = this.element.querySelector('.btn');
 		btn.addEventListener('click', () => {
 			fetch(url, {
@@ -43,12 +47,13 @@ export default class Messages {
 
 	// eslint-disable-next-line class-methods-use-this
 	getMessage() {
-		const url = 'http://localhost:3000/messages/unread';
+		const url = `${Messages.url}/messages/unread`;
 		const oldMessages = [];
 		interval(2000).pipe(
 			switchMap(() => ajax.getJSON(url).pipe(
 				map((response) => [...response.messages]),
 				catchError((error) => {
+					// eslint-disable-next-line no-console
 					console.log('error: ', error);
 					return of(error);
 				}),
