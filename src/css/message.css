@@ -1,0 +1,22 @@
+.messages-container > *:not(:last-child) {
+	margin-bottom: .5rem;
+}
+
+.message {
+	display: flex;
+	width: max-content;
+	background-color: #ff6e68;
+	padding: 1rem;
+	border-radius: .5rem;
+}
+
+.message > *:not(:last-child) {
+	margin-right: .5rem;
+}
+
+.message .content, .message .email {
+	width: 132px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
