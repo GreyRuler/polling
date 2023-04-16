@@ -48,20 +48,17 @@ export default class Messages {
 	// eslint-disable-next-line class-methods-use-this
 	getMessage() {
 		const url = `${Messages.url}/messages/unread`;
-		const oldMessages = [];
 		interval(2000).pipe(
 			switchMap(() => ajax.getJSON(url).pipe(
 				map((response) => [...response.messages]),
 				catchError((error) => {
 					// eslint-disable-next-line no-console
 					console.log('error: ', error);
-					return of(error);
+					return of([]);
 				}),
 			)),
 			concatAll(),
-			filter((value) => !oldMessages.includes(value.received)),
 		).subscribe((message) => {
-			oldMessages.push(message.received);
 			this.reflectMessages(message);
 		});
 	}
